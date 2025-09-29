@@ -1,0 +1,857 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+  <title>Support Us - Coderz</title>
+  <link href="style.css" rel="stylesheet" type="text/css" />
+  <link rel="icon" type="image/png" href="favicon.png"> 
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap"
+    rel="stylesheet">
+  <style>
+    .support-header {
+      background: linear-gradient(135deg, var(--hack-dark) 0%, #252429 100%);
+      color: var(--hack-white);
+      position: relative;
+      min-height: 70vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      overflow: hidden;
+      padding: 4rem 1rem;
+    }
+
+    .support-header h1 {
+      font-size: 4.5rem;
+      margin-bottom: 1.5rem;
+      z-index: 10;
+      text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+      background: linear-gradient(45deg, var(--hack-red), var(--hack-blue), var(--hack-green));
+      background-size: 200%;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: gradient 5s ease infinite;
+    }
+
+    .support-subtitle {
+      font-size: 1.8rem;
+      max-width: 800px;
+      margin: 0 auto 2rem;
+      z-index: 10;
+      position: relative;
+      opacity: 0;
+      transform: translateY(30px);
+      animation: fadeIn 1s ease-out 0.5s forwards;
+    }
+
+    .highlight-text {
+      color: var(--hack-primary);
+      font-weight: 700;
+      background: rgba(236, 55, 80, 0.1);
+      padding: 0.2rem 0.5rem;
+      border-radius: 4px;
+    }
+
+    .support-cta {
+      z-index: 10;
+      position: relative;
+      opacity: 0;
+      transform: translateY(30px);
+      animation: fadeIn 1s ease-out 0.8s forwards;
+    }
+
+    .donation-btn {
+      padding: 1rem 2rem;
+      font-size: 1.2rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: linear-gradient(45deg, var(--hack-primary), #ff6b8b);
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 15px rgba(236, 55, 80, 0.3);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .donation-btn:hover {
+      transform: translateY(-5px) scale(1.05);
+      box-shadow: 0 7px 20px rgba(236, 55, 80, 0.4);
+    }
+
+    .donation-btn i {
+      font-size: 1.1em;
+      transition: transform 0.3s ease;
+    }
+
+    .donation-btn:hover i {
+      transform: scale(1.2);
+      animation: pulse 1.5s infinite;
+    }
+
+    .donation-btn::before {
+      content: "";
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: linear-gradient(to right, rgba(255,255,255,0) 0%, rgba(255,255,255,0.3) 50%, rgba(255,255,255,0) 100%);
+      transform: rotate(45deg);
+      transition: 0.6s;
+      opacity: 0;
+    }
+
+    .donation-btn:hover::before {
+      left: 100%;
+      opacity: 1;
+    }
+
+    .funding-misconception {
+      background: linear-gradient(to right, rgba(236, 55, 80, 0.1), rgba(51, 142, 218, 0.1));
+      padding: 2rem;
+      border-radius: 15px;
+      margin: 4rem 0;
+      position: relative;
+      border-left: 5px solid var(--hack-primary);
+      box-shadow: var(--shadow-md);
+    }
+
+    .funding-misconception h2 {
+      display: inline-block;
+      margin-bottom: 1.5rem;
+      color: var(--hack-primary);
+    }
+
+    .funding-misconception h2::after {
+      background: linear-gradient(to right, var(--hack-primary), var(--hack-blue));
+      width: 100%;
+    }
+
+    .funding-misconception p {
+      font-size: 1.1rem;
+      line-height: 1.7;
+    }
+
+    .support-section {
+      padding: 5rem 0;
+      position: relative;
+      background-color: var(--hack-light);
+      overflow: hidden;
+    }
+
+    .support-section::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image:
+        radial-gradient(circle at 20% 30%, rgba(236, 55, 80, 0.05) 0%, transparent 50%),
+        radial-gradient(circle at 80% 70%, rgba(51, 142, 218, 0.05) 0%, transparent 50%),
+        radial-gradient(circle at 50% 50%, rgba(51, 214, 166, 0.03) 0%, transparent 80%);
+      z-index: 0;
+    }
+
+    .donation-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 2rem;
+      margin-top: 3rem;
+    }
+
+    .donation-purpose {
+      flex: 1;
+      min-width: 280px;
+      background-color: var(--hack-white);
+      border-radius: 15px;
+      padding: 2rem;
+      box-shadow: var(--shadow-md);
+      transition: var(--transition);
+      position: relative;
+      overflow: hidden;
+      border: 1px solid rgba(0, 0, 0, 0.05);
+      transform: translateY(50px);
+      opacity: 0;
+      animation: fadeInUp 0.8s forwards;
+      animation-delay: calc(var(--i) * 0.2s);
+    }
+
+    .donation-purpose:hover {
+      transform: translateY(-10px);
+      box-shadow: var(--shadow-lg);
+    }
+
+    .purpose-1 { --i: 1; }
+    .purpose-2 { --i: 2; }
+    .purpose-3 { --i: 3; }
+    .purpose-4 { --i: 4; }
+
+    @keyframes fadeInUp {
+      to {
+        transform: translateY(0);
+        opacity: 1;
+      }
+    }
+
+    .donation-purpose::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 5px;
+      background: linear-gradient(90deg, var(--hack-primary), var(--hack-secondary));
+    }
+
+    .purpose-icon {
+      width: 70px;
+      height: 70px;
+      background: linear-gradient(135deg, var(--hack-primary), var(--hack-secondary));
+      border-radius: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin: 0 auto 1.5rem;
+      color: var(--hack-white);
+      font-size: 2rem;
+      box-shadow: var(--shadow-sm);
+      transition: var(--transition);
+    }
+
+    .donation-purpose:hover .purpose-icon {
+      transform: rotate(10deg) scale(1.1);
+    }
+
+    .donation-purpose h3 {
+      text-align: center;
+      margin-bottom: 1rem;
+      color: var(--hack-dark);
+    }
+
+    .donation-purpose p {
+      text-align: center;
+      margin-bottom: 0;
+    }
+
+    .transparency {
+      margin-top: 5rem;
+      padding: 3rem;
+      background-color: rgba(51, 142, 218, 0.05);
+      border-radius: 15px;
+      position: relative;
+      overflow: hidden;
+      box-shadow: var(--shadow-md);
+    }
+
+    .transparency::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 5px;
+      height: 100%;
+      background: var(--hack-blue);
+    }
+
+    .transparency h2 {
+      color: var(--hack-blue);
+      margin-bottom: 2rem;
+    }
+
+    .transparency h2::after {
+      background: var(--hack-blue);
+    }
+
+    .transparency-features {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 2rem;
+      margin-top: 2rem;
+    }
+
+    .transparency-feature {
+      flex: 1;
+      min-width: 280px;
+      display: flex;
+      align-items: flex-start;
+      gap: 1rem;
+    }
+
+    .transparency-icon {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      background: rgba(51, 142, 218, 0.1);
+      color: var(--hack-blue);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      flex-shrink: 0;
+    }
+
+    .transparency-content h4 {
+      margin-bottom: 0.5rem;
+      color: var(--hack-blue);
+    }
+
+    .transparency-content p {
+      margin-bottom: 0;
+    }
+
+    .transparency-link {
+      display: inline-block;
+      margin-top: 1.5rem;
+      padding: 0.8rem 1.5rem;
+      background-color: rgba(51, 142, 218, 0.1);
+      color: var(--hack-blue);
+      border-radius: 8px;
+      font-weight: 600;
+      transition: var(--transition);
+    }
+
+    .transparency-link:hover {
+      background-color: rgba(51, 142, 218, 0.2);
+      transform: translateY(-5px);
+    }
+
+    .transparency-link i {
+      margin-right: 0.5rem;
+      transition: transform 0.3s;
+    }
+
+    .transparency-link:hover i {
+      transform: translateX(3px);
+    }
+
+    .donation-impact {
+      margin-top: 5rem;
+      text-align: center;
+    }
+
+    .donation-impact h2 {
+      margin-bottom: 3rem;
+      position: relative;
+      display: inline-block;
+    }
+
+    .impact-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 2rem;
+      justify-content: center;
+      margin-top: 3rem;
+    }
+
+    .impact-item {
+      width: 200px;
+      text-align: center;
+      position: relative;
+    }
+
+    .impact-value {
+      font-size: 3rem;
+      font-weight: 700;
+      color: var(--hack-primary);
+      margin-bottom: 0.5rem;
+    }
+
+    .impact-label {
+      font-size: 1.1rem;
+      color: var(--hack-dark);
+    }
+
+    .donation-cta {
+      margin-top: 5rem;
+      padding: 3rem;
+      background: linear-gradient(135deg, var(--hack-dark) 0%, #252429 100%);
+      color: var(--hack-white);
+      text-align: center;
+      border-radius: 15px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .donation-cta::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image: url('data:image/svg+xml;charset=utf8,%3Csvg width="60" height="60" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg"%3E%3Cg fill="none" fill-rule="evenodd"%3E%3Cg fill="%239C92AC" fill-opacity="0.08"%3E%3Cpath d="M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z"/%3E%3C/g%3E%3C/g%3E%3C/svg%3E');
+      opacity: 0.4;
+    }
+
+    .donation-cta h2 {
+      font-size: 2.5rem;
+      margin-bottom: 1.5rem;
+      color: var(--hack-white);
+    }
+
+    .donation-cta h2::after {
+      display: none;
+    }
+
+    .donation-cta p {
+      font-size: 1.3rem;
+      max-width: 800px;
+      margin: 0 auto 2rem;
+    }
+
+    .donation-amount-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      justify-content: center;
+      margin-bottom: 2rem;
+    }
+
+    .donation-amount {
+      padding: 1rem 2rem;
+      background-color: rgba(255, 255, 255, 0.1);
+      border-radius: 8px;
+      cursor: pointer;
+      transition: var(--transition);
+      border: 2px solid transparent;
+    }
+
+    .donation-amount:hover, .donation-amount.active {
+      background-color: rgba(255, 255, 255, 0.2);
+      transform: translateY(-5px);
+      border-color: var(--hack-primary);
+    }
+
+    .donation-amount strong {
+      font-size: 1.5rem;
+      display: block;
+      color: var(--hack-white);
+    }
+
+    .donation-amount span {
+      font-size: 0.9rem;
+      opacity: 0.8;
+    }
+
+    .moving-dollars {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    .dollar {
+      position: absolute;
+      font-size: 1.5rem;
+      color: var(--hack-primary);
+      opacity: 0.15;
+      animation: floatUpward 8s linear infinite;
+    }
+
+    @keyframes floatUpward {
+      0% {
+        transform: translateY(100%) rotate(0deg);
+        opacity: 0.3;
+      }
+      100% {
+        transform: translateY(-100vh) rotate(720deg);
+        opacity: 0;
+      }
+    }
+
+    /* Animated background elements in header */
+    .moving-shapes {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+      z-index: 1;
+      overflow: hidden;
+    }
+
+    .moving-shape {
+      position: absolute;
+      background: linear-gradient(45deg, var(--hack-primary), var(--hack-secondary));
+      opacity: 0.1;
+      border-radius: 50%;
+      animation: shapeFloat 15s infinite alternate;
+    }
+
+    .shape-1 {
+      width: 300px;
+      height: 300px;
+      top: -150px;
+      left: -150px;
+      animation-delay: 0s;
+    }
+
+    .shape-2 {
+      width: 200px;
+      height: 200px;
+      bottom: -100px;
+      right: -100px;
+      background: linear-gradient(45deg, var(--hack-blue), var(--hack-green));
+      animation-delay: 5s;
+    }
+
+    .shape-3 {
+      width: 150px;
+      height: 150px;
+      top: 40%;
+      left: 10%;
+      background: linear-gradient(45deg, var(--hack-green), var(--hack-blue));
+      animation-delay: 2s;
+    }
+
+    .shape-4 {
+      width: 100px;
+      height: 100px;
+      bottom: 30%;
+      right: 20%;
+      animation-delay: 7s;
+    }
+
+    @keyframes shapeFloat {
+      0% {
+        transform: translate(0, 0) rotate(0deg);
+      }
+      100% {
+        transform: translate(100px, 50px) rotate(90deg);
+      }
+    }
+
+    .alert-banner {
+      background: linear-gradient(to right, var(--hack-primary), #ff6b8b);
+      color: white;
+      padding: 1.5rem;
+      border-radius: 8px;
+      margin: 2rem auto;
+      max-width: 900px;
+      font-size: 1.2rem;
+      text-align: center;
+      font-weight: 500;
+      box-shadow: var(--shadow-md);
+      position: relative;
+      overflow: hidden;
+      animation: pulse 2s infinite;
+    }
+
+    .alert-banner::before {
+      content: "";
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: linear-gradient(to right, rgba(255,255,255,0) 0%, rgba(255,255,255,0.3) 50%, rgba(255,255,255,0) 100%);
+      transform: rotate(45deg);
+      animation: shine 3s infinite;
+    }
+
+    @keyframes shine {
+      0% {
+        left: -50%;
+      }
+      100% {
+        left: 150%;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .support-header h1 {
+        font-size: 3rem;
+      }
+
+      .support-subtitle {
+        font-size: 1.3rem;
+      }
+
+      .transparency {
+        padding: 2rem;
+      }
+
+      .donation-purpose, .transparency-feature {
+        min-width: 100%;
+      }
+
+      .donation-cta {
+        padding: 2rem;
+      }
+
+      .donation-cta h2 {
+        font-size: 2rem;
+      }
+
+      .donation-cta p {
+        font-size: 1.1rem;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <header class="subpage-header">
+    <nav>
+      <div class="logo">
+        <span><i class="fas fa-code"></i> Coderz</span>
+      </div>
+      <div class="nav-links">
+        <a href="index.html#mission">Mission</a>
+        <a href="what-is-hacking.html">What is Hacking?</a>
+        <a href="index.html#about">About</a>
+        <a href="index.html#locations">Locations</a>
+        <a href="support-us.html">Support Us</a>
+      </div>
+      <div class="hamburger">
+        <div class="line"></div>
+        <div class="line"></div>
+        <div class="line"></div>
+      </div>
+    </nav>
+  </header>
+
+  <section class="support-header">
+    <div class="moving-shapes">
+      <div class="moving-shape shape-1"></div>
+      <div class="moving-shape shape-2"></div>
+      <div class="moving-shape shape-3"></div>
+      <div class="moving-shape shape-4"></div>
+    </div>
+    <h1>Support Our Mission</h1>
+    <p class="support-subtitle">Your donations directly impact the next generation of innovators, builders, and creators</p>
+    <div class="support-cta">
+      <a href="https://hcb.hackclub.com/donations/start/coderz" target="_blank" class="btn primary donation-btn">
+        <i class="fas fa-heart"></i> Donate Now
+      </a>
+    </div>
+  </section>
+
+  <section class="support-section">
+    <div class="container">
+      <div class="funding-misconception">
+        <h2>Setting the Record Straight</h2>
+        <p>A <strong>common misconception</strong> is that we're fully funded by Hack Club and our schools - <span class="highlight-text">we are not!</span> While Hack Club provides us with resources and banking services, the grants they provide are <span class="highlight-text">for rewards only</span>.</p>
+        <p>For everything else - from equipment to learning materials - <span class="highlight-text">we rely entirely on generous donors like you</span>. Your support is what makes our programs possible!</p>
+      </div>
+
+      <div class="alert-banner">
+        <i class="fas fa-exclamation-circle"></i> 100% of our equipment, supplies, and learning resources come ONLY from DONATIONS!
+      </div>
+
+      <h2>Where Your Donations Go <i class="fas fa-hand-holding-usd" style="color: var(--hack-primary);"></i></h2>
+      <p style="text-align: center; font-size: 1.2rem; margin-bottom: 2rem;">Every dollar you donate goes directly to empowering students with the tools they need to build the future</p>
+
+      <div class="donation-grid">
+        <div class="donation-purpose purpose-1">
+          <div class="purpose-icon">
+            <i class="fas fa-microchip"></i>
+          </div>
+          <h3>Hardware & Equipment</h3>
+          <p>We purchase microcontrollers, Orpheus Picos, Arduino kits, and other hardware that students can use to build amazing projects.</p>
+        </div>
+
+        <div class="donation-purpose purpose-2">
+          <div class="purpose-icon" style="background: linear-gradient(135deg, var(--hack-blue), var(--hack-green));">
+            <i class="fas fa-laptop-code"></i>
+          </div>
+          <h3>Software Subscriptions</h3>
+          <p>Access to professional development tools and learning platforms that would otherwise be inaccessible to many students.</p>
+        </div>
+
+        <div class="donation-purpose purpose-3">
+          <div class="purpose-icon" style="background: linear-gradient(135deg, var(--hack-green), var(--hack-blue));">
+            <i class="fas fa-tools"></i>
+          </div>
+          <h3>Learning Resources</h3>
+          <p>Technical books, online courses, and specialized learning materials that help students master new skills.</p>
+        </div>
+
+        <div class="donation-purpose purpose-4">
+          <div class="purpose-icon" style="background: linear-gradient(135deg, var(--hack-primary), #ff9500);">
+            <i class="fas fa-users"></i>
+          </div>
+          <h3>Community Events</h3>
+          <p>Hackathons, workshops, and collaborative coding sessions that bring our tech community together to learn and build.</p>
+        </div>
+      </div>
+
+      <div class="transparency">
+        <h2>100% Financial Transparency <i class="fas fa-search-dollar"></i></h2>
+        <p>We believe in complete transparency with how we use your donations. Every dollar is tracked and visible to the public.</p>
+
+        <div class="transparency-features">
+          <div class="transparency-feature">
+            <div class="transparency-icon">
+              <i class="fas fa-file-invoice-dollar"></i>
+            </div>
+            <div class="transparency-content">
+              <h4>Public Transaction Records</h4>
+              <p>Every expense is documented and available for public review. See exactly how your donation makes an impact.</p>
+            </div>
+          </div>
+
+          <div class="transparency-feature">
+            <div class="transparency-icon">
+              <i class="fas fa-hand-holding-heart"></i>
+            </div>
+            <div class="transparency-content">
+              <h4>Direct Student Impact</h4>
+              <p>100% of donations go directly to student resources - no administrative costs or overhead.</p>
+            </div>
+          </div>
+        </div>
+
+        <p style="text-align: center; margin-top: 2rem;">
+          <a href="https://hcb.hackclub.com/coderz" target="_blank" class="transparency-link">
+            <i class="fas fa-external-link-alt"></i> View Our Financial Records
+          </a>
+        </p>
+      </div>
+
+      <div class="donation-impact">
+        <h2>Your Donation Makes a Difference</h2>
+        <p style="text-align: center; max-width: 800px; margin: 0 auto 2rem;">Here's how your contributions translate into real impact:</p>
+
+        <div class="impact-grid">
+          <div class="impact-item">
+            <div class="impact-value">$25</div>
+            <div class="impact-label">Provides basic electronics components for one student</div>
+          </div>
+
+          <div class="impact-item">
+            <div class="impact-value">$50</div>
+            <div class="impact-label">Funds an Arduino starter kit</div>
+          </div>
+
+          <div class="impact-item">
+            <div class="impact-value">$100</div>
+            <div class="impact-label">Sponsors software subscriptions for learning</div>
+          </div>
+
+          <div class="impact-item">
+            <div class="impact-value">$250+</div>
+            <div class="impact-label">Enables specialized hardware for advanced projects</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="donation-cta">
+        <div class="moving-dollars">
+          <div class="dollar" style="left: 10%; animation-duration: 10s;">$</div>
+          <div class="dollar" style="left: 25%; animation-duration: 12s; animation-delay: 1s;">$</div>
+          <div class="dollar" style="left: 40%; animation-duration: 9s; animation-delay: 2s;">$</div>
+          <div class="dollar" style="left: 60%; animation-duration: 11s; animation-delay: 3s;">$</div>
+          <div class="dollar" style="left: 75%; animation-duration: 13s; animation-delay: 1.5s;">$</div>
+          <div class="dollar" style="left: 90%; animation-duration: 10s; animation-delay: 4s;">$</div>
+        </div>
+
+        <h2>Ready to Make an Impact?</h2>
+        <p>Your donation today will directly support the next generation of innovators. Every contribution, no matter the size, makes a difference in a student's journey!</p>
+
+        <div class="donation-amount-grid">
+          <div class="donation-amount">
+            <strong>$25</strong>
+            <span>Starter Pack</span>
+          </div>
+          <div class="donation-amount">
+            <strong>$50</strong>
+            <span>Builder Level</span>
+          </div>
+          <div class="donation-amount">
+            <strong>$100</strong>
+            <span>Innovator Tier</span>
+          </div>
+          <div class="donation-amount">
+            <strong>$250</strong>
+            <span>Visionary Circle</span>
+          </div>
+        </div>
+
+        <a href="https://hcb.hackclub.com/donations/start/coderz" target="_blank" class="btn primary donation-btn" style="font-size: 1.3rem; padding: 1.2rem 2.5rem;">
+          <i class="fas fa-heart"></i> Donate Now
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="footer-symbols">
+      <span class="footer-symbol">&lt;/&gt;</span>
+      <span class="footer-symbol">{}</span>
+      <span class="footer-symbol">[]</span>
+      <span class="footer-symbol">#</span>
+    </div>
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-info">
+          <h3>Coderz</h3>
+          <p>A Hack Club community in Gahanna, OH</p>
+        </div>
+        <div class="footer-links">
+          <a href="https://hackclub.com" target="_blank">Hack Club</a>
+          <a href="index.html#mission">Our Mission</a>
+          <a href="support-us.html">Support Us</a>
+        </div>
+        <div class="footer-social">
+          <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
+          <a href="https://github.com/Coderz-Club" class="social-icon"><i class="fab fa-github"></i></a>
+          <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2025 Coderz. Founded by Theodore Rose.</p>
+        <p class="fiscal-note">Fiscally sponsored by Hack Club, a 501(c)(3) nonprofit with the EIN 81-2908499.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+  <script>
+    // Add interactivity to donation amounts
+    const donationAmounts = document.querySelectorAll('.donation-amount');
+    
+    donationAmounts.forEach(amount => {
+      amount.addEventListener('click', () => {
+        donationAmounts.forEach(a => a.classList.remove('active'));
+        amount.classList.add('active');
+      });
+    });
+
+    // Add animated dollar signs
+    const movingDollars = document.querySelector('.moving-dollars');
+    
+    function createDollar() {
+      const dollar = document.createElement('div');
+      dollar.classList.add('dollar');
+      dollar.textContent = '$';
+      dollar.style.left = Math.random() * 100 + '%';
+      dollar.style.animationDuration = 8 + Math.random() * 7 + 's';
+      movingDollars.appendChild(dollar);
+      
+      // Remove dollar after animation completes
+      setTimeout(() => {
+        dollar.remove();
+      }, parseFloat(dollar.style.animationDuration) * 1000);
+    }
+    
+    // Create dollars periodically
+    setInterval(createDollar, 2000);
+    
+    // Create initial dollars
+    for (let i = 0; i < 6; i++) {
+      setTimeout(createDollar, i * 1000);
+    }
+  </script>
+</body>
+
+</html>
